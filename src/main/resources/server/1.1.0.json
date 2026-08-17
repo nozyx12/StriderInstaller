@@ -1,0 +1,45 @@
+{
+  "libraries": [
+    {
+      "path": "dev/nozyx/strider/striderloader/1.1.0/striderloader-1.1.0.jar",
+      "url": "https://maven.nozyx.dev/dev/nozyx/strider/striderloader/1.1.0/striderloader-1.1.0.jar",
+      "sha1": "0b13ae98258fc6f22e0946eab50bb974147dc6a0"
+    },
+    {
+      "path": "net/bytebuddy/byte-buddy/1.18.7/byte-buddy-1.18.7.jar",
+      "url": "https://repo1.maven.org/maven2/net/bytebuddy/byte-buddy/1.18.7/byte-buddy-1.18.7.jar",
+      "sha1": "08d80cadfcb9dfe1c9a04cc5c3064b4625bba9fa"
+    },
+    {
+      "path": "tools/jackson/core/jackson-databind/3.2.2/jackson-databind-3.2.2.jar",
+      "url": "https://repo1.maven.org/maven2/tools/jackson/core/jackson-databind/3.2.2/jackson-databind-3.2.2.jar",
+      "sha1": "7415dfebcdfed0af627a087ed175e7ab08bb12e6"
+    },
+    {
+      "path": "tools/jackson/core/jackson-core/3.2.2/jackson-core-3.2.2.jar",
+      "url": "https://repo1.maven.org/maven2/tools/jackson/core/jackson-core/3.2.2/jackson-core-3.2.2.jar",
+      "sha1": "33448a192d5b662438c859a57daf0f3e8ad9da4b"
+    },
+    {
+      "path": "com/fasterxml/jackson/core/jackson-annotations/2.22/jackson-annotations-2.22.jar",
+      "url": "https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.22/jackson-annotations-2.22.jar",
+      "sha1": "15c67f9498d6934cff9510fc70c5a12e52290457"
+    },
+    {
+      "path": "org/semver4j/semver4j/6.0.0/semver4j-6.0.0.jar",
+      "url": "https://repo1.maven.org/maven2/org/semver4j/semver4j/6.0.0/semver4j-6.0.0.jar",
+      "sha1": "995a8afc0b9d9a700c7858843a36ece815852d72"
+    },
+    {
+      "path": "com/formdev/flatlaf/3.7.2/flatlaf-3.7.2.jar",
+      "url": "https://repo1.maven.org/maven2/com/formdev/flatlaf/3.7.2/flatlaf-3.7.2.jar",
+      "sha1": "fcf9f3f276b11c7f5fc525838073ddcd80abda6a"
+    }
+  ],
+  "jvmArguments": [
+    "-Dstriderloader.mcVersion=<mcVersion>",
+    "-Dstriderloader.mcSide=server",
+    "-Dstriderloader.uiEnabled=<uiEnabled>"
+  ],
+  "mainClass": "dev.nozyx.strider.loader.impl.StriderLoader"
+}
