@@ -84,7 +84,8 @@
   "arguments": {
     "jvm": [
       "-Dstriderloader.mcVersion=<mcVersion>",
-      "-Dstriderloader.mcSide=client"
+      "-Dstriderloader.mcSide=client",
+      "-Dstriderloader.uiEnabled=<uiEnabled>"
     ],
     "game": []
   },

@@ -44,6 +44,7 @@ public class ClientTab {
 
     private final JComboBox<String> striderVersionBox;
     private final JComboBox<String> mcVersionCombo;
+    private final JCheckBox disableUICheckBox;
     private final JTextField pathField;
     private final JButton installButton;
 
@@ -75,6 +76,9 @@ public class ClientTab {
 
         mcVersionCombo =
                 new JComboBox<>();
+
+        disableUICheckBox =
+                new JCheckBox("Disable UI");
 
         pathField =
                 new JTextField(
@@ -190,7 +194,26 @@ public class ClientTab {
         );
 
         panel.add(mcVersionCombo);
-        panel.add(Box.createVerticalStrut(20));
+        panel.add(Box.createVerticalStrut(5));
+
+        disableUICheckBox.setFont(
+                new Font(
+                        "SansSerif",
+                        Font.PLAIN,
+                        16
+                )
+        );
+
+        disableUICheckBox.setAlignmentX(
+                Component.CENTER_ALIGNMENT
+        );
+
+        disableUICheckBox.setToolTipText(
+                "Disable the StriderLoader startup UI."
+        );
+
+        panel.add(disableUICheckBox);
+        panel.add(Box.createVerticalStrut(5));
 
         JLabel launcherLabel =
                 new JLabel("Launcher folder:");
@@ -335,9 +358,7 @@ public class ClientTab {
 
     private void browse() {
         JFileChooser chooser =
-                new JFileChooser(
-                        pathField.getText()
-                );
+                new JFileChooser();
 
         chooser.setFileSelectionMode(
                 JFileChooser.DIRECTORIES_ONLY
@@ -372,12 +393,16 @@ public class ClientTab {
         String launcherFolder =
                 pathField.getText();
 
+        boolean disableUI =
+                disableUICheckBox.isSelected();
+
         try {
             boolean installed =
                     install(
                             loaderVersion,
                             mcVersion,
-                            launcherFolder
+                            launcherFolder,
+                            disableUI
                     );
 
             if (!installed) {
@@ -412,9 +437,9 @@ public class ClientTab {
     private boolean install(
             String loaderVersion,
             String mcVersion,
-            String launcherFolder
+            String launcherFolder,
+            boolean disableUI
     ) throws Exception {
-
         File launcherProfiles =
                 new File(
                         launcherFolder,
@@ -494,7 +519,8 @@ public class ClientTab {
         createVersionJson(
                 loaderVersion,
                 mcVersion,
-                striderDir
+                striderDir,
+                disableUI
         );
 
         updateLauncherProfiles(
@@ -509,7 +535,8 @@ public class ClientTab {
     private void createVersionJson(
             String loaderVersion,
             String mcVersion,
-            File striderDir
+            File striderDir,
+            boolean disableUI
     ) throws IOException {
 
         try (InputStream is =
@@ -539,6 +566,10 @@ public class ClientTab {
                             .replace(
                                     "<mcVersion>",
                                     mcVersion
+                            )
+                            .replace(
+                                    "<uiEnabled>",
+                                    Boolean.toString(!disableUI)
                             );
 
             Files.writeString(

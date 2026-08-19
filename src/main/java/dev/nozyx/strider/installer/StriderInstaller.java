@@ -35,9 +35,6 @@ import java.util.Base64;
 
 public class StriderInstaller {
 
-    private static final Point[] mouseClickPoint =
-            new Point[1];
-
     public static void main(String[] args) {
         FlatLightLaf.setup();
 
@@ -97,7 +94,7 @@ public class StriderInstaller {
                 JFrame.EXIT_ON_CLOSE
         );
 
-        frame.setSize(400, 500);
+        frame.setSize(400, 520);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
 
@@ -111,37 +108,6 @@ public class StriderInstaller {
                             .getImage()
             );
         }
-
-        frame.addMouseListener(
-                new MouseAdapter() {
-                    @Override
-                    public void mousePressed(
-                            MouseEvent e
-                    ) {
-                        mouseClickPoint[0] =
-                                e.getPoint();
-                    }
-                }
-        );
-
-        frame.addMouseMotionListener(
-                new MouseAdapter() {
-                    @Override
-                    public void mouseDragged(
-                            MouseEvent e
-                    ) {
-                        Point current =
-                                e.getLocationOnScreen();
-
-                        frame.setLocation(
-                                current.x
-                                        - mouseClickPoint[0].x,
-                                current.y
-                                        - mouseClickPoint[0].y
-                        );
-                    }
-                }
-        );
 
         frame.setLayout(
                 new BorderLayout()

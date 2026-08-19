@@ -95,7 +95,9 @@ public class ServerTab {
                 new JCheckBox("Disable UI");
 
         pathField =
-                new JTextField();
+                new JTextField(
+                        "-- Select server folder --"
+                );
 
         installButton =
                 new JButton("Install");
@@ -370,9 +372,7 @@ public class ServerTab {
 
     private void browse() {
         JFileChooser chooser =
-                new JFileChooser(
-                        pathField.getText()
-                );
+                new JFileChooser();
 
         chooser.setFileSelectionMode(
                 JFileChooser.DIRECTORIES_ONLY
@@ -425,13 +425,18 @@ public class ServerTab {
                     protected Void doInBackground()
                             throws Exception {
 
-                        install(
-                                loaderVersion,
-                                mcVersion,
-                                serverFolder,
-                                disableUI,
-                                progress
-                        );
+                        boolean installed =
+                                install(
+                                        loaderVersion,
+                                        mcVersion,
+                                        serverFolder,
+                                        disableUI,
+                                        progress
+                                );
+
+                        if (!installed) {
+                            cancel(false);
+                        }
 
                         return null;
                     }
@@ -444,6 +449,10 @@ public class ServerTab {
                         striderVersionBox.setEnabled(true);
                         mcVersionCombo.setEnabled(true);
                         disableUICheckBox.setEnabled(true);
+
+                        if (isCancelled()) {
+                            return;
+                        }
 
                         try {
                             get();
@@ -486,7 +495,7 @@ public class ServerTab {
         progress.showDialog();
     }
 
-    private void install(
+    private boolean install(
             String loaderVersion,
             String mcVersion,
             String serverFolder,
@@ -495,6 +504,30 @@ public class ServerTab {
     ) throws Exception {
         Path serverFolderPath =
                 Path.of(serverFolder);
+
+        if (Files.isDirectory(serverFolderPath)) {
+            try (Stream<Path> stream =
+                         Files.list(serverFolderPath)) {
+
+                if (stream.findAny().isPresent()) {
+                    int result =
+                            JOptionPane.showConfirmDialog(
+                                    frame,
+                                    """
+                                            The selected server folder is not empty.
+                                            Existing files may be overwritten.
+                                            Continue anyway?""",
+                                    "Non-empty server folder",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.WARNING_MESSAGE
+                            );
+
+                    if (result != JOptionPane.YES_OPTION) {
+                        return false;
+                    }
+                }
+            }
+        }
 
         Files.createDirectories(
                 serverFolderPath
@@ -560,6 +593,8 @@ public class ServerTab {
         );
 
         progress.setCompleted();
+
+        return true;
     }
 
     private void extractMinecraftBundle(

@@ -1,16 +1,16 @@
 {
-  "id": "striderloader-1.0.0-<mcVersion>",
+  "id": "striderloader-1.1.1-<mcVersion>",
   "inheritsFrom": "<mcVersion>",
   "type": "release",
   "libraries": [
     {
-      "name": "dev.nozyx.strider:striderloader:1.0.0",
+      "name": "dev.nozyx.strider:striderloader:1.1.1",
       "downloads": {
         "artifact": {
-          "path": "dev/nozyx/strider/striderloader/1.0.0/striderloader-1.0.0.jar",
-          "url": "https://maven.nozyx.dev/dev/nozyx/strider/striderloader/1.0.0/striderloader-1.0.0.jar",
-          "sha1": "4c79edc640d47ab2fe2a924c34997e853d8c7c04",
-          "size": 102149
+          "path": "dev/nozyx/strider/striderloader/1.1.1/striderloader-1.1.1.jar",
+          "url": "https://maven.nozyx.dev/dev/nozyx/strider/striderloader/1.1.1/striderloader-1.1.1.jar",
+          "sha1": "d16ab9a14cd5c85bbd73109ae5be89485530b346",
+          "size": 103471
         }
       }
     },

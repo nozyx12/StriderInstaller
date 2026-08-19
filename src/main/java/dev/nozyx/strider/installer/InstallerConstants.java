@@ -18,28 +18,44 @@
 
 package dev.nozyx.strider.installer;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class InstallerConstants {
 
     private InstallerConstants() {}
 
-    public static final String VERSION = "1.0.1";
+    public static final String VERSION = "1.1.0";
 
-    public static final Map<String, String[]> SUPPORTED_VERSIONS = Map.of(
-            "1.1.0", new String[]{
-                    "26.2",
-                    "26.1.2",
-                    "26.1.1",
-                    "26.1"
-            },
-            "1.0.0", new String[]{
-                    "26.2",
-                    "26.1.2",
-                    "26.1.1",
-                    "26.1"
-            }
-    );
+    public static final Map<String, String[]> SUPPORTED_VERSIONS;
+
+    static {
+        Map<String, String[]> versions = new LinkedHashMap<>();
+
+        versions.put("1.1.1", new String[]{
+                "26.2",
+                "26.1.2",
+                "26.1.1",
+                "26.1"
+        });
+
+        versions.put("1.1.0", new String[]{
+                "26.2",
+                "26.1.2",
+                "26.1.1",
+                "26.1"
+        });
+
+        versions.put("1.0.0", new String[]{
+                "26.2",
+                "26.1.2",
+                "26.1.1",
+                "26.1"
+        });
+
+        SUPPORTED_VERSIONS = Collections.unmodifiableMap(versions);
+    }
 
     public static final String[] SUPPORTED_LOADER_VERSIONS =
             SUPPORTED_VERSIONS.keySet().toArray(String[]::new);
